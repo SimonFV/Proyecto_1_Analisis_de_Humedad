@@ -22,7 +22,7 @@ def promedio(lista):
     total = 0
     for n in range(len(lista)):
         total += lista[n]
-    return total/n
+    return total/(n + 1)
 
 # Funcion que calcula la moda de un array
 def moda(lista):
@@ -44,19 +44,49 @@ def moda(lista):
             maximo = valores[key]
     return moda
 
+# Funcion que calcula la mediana de un array
 def mediana(lista):
     n = len(lista)
     if n % 2 == 0: 
-        return (lista[int(n / 2)] + lista[int((n / 2) + 1)]) / 2 # n par
-    return lista[int((n + 1) / 2)] # n impar
+        return (lista[int(n / 2) - 1] + lista[int((n / 2))]) / 2 # n par
+    return lista[int((n + 1) / 2) - 1] # n impar
 
+# Funcion que calcula los cuartiles de un array
 def cuartiles(lista):
     n = len(lista)
     if n % 4 == 0:
-        return [lista[int(n / 4)], mediana(lista), lista[int(n * 3 / 4)]] # n divisible por 4
-    return [lista[int(n / 4) + 1], mediana(lista), lista[int(n * 3 / 4) + 1]] # n no divisible por 4
+        return [lista[int(n / 4) - 1], mediana(lista), lista[int(n * 3 / 4) - 1]] # n divisible por 4
+    return [lista[int(n / 4)], mediana(lista), lista[int(n * 3 / 4)]] # n no divisible por 4
+
+# Funcion que calcula la varianza de un array
+def varianza(lista):
+    prom = promedio(lista)
+    varianza = 0
+    for n in range(len(lista)):
+        varianza += (lista[n] - prom) ** 2
+    return varianza / n
+
+def desviacion_estandar(lista):
+    return varianza(lista) ** (1/2)
+
+def coeficiente_de_variacion(lista):
+    return desviacion_estandar(lista) * 100 / promedio(lista)
+
+def rango_muestral(lista):
+    return max(lista) - min(lista)
+
+def RIC(lista):
+    cuart = cuartiles(lista)
+    return cuart[2] - cuart[0]
+
 
 print("promedio: ", promedio(humedad))
-print("moda, repeticiones: ", moda(humedad))
+print("moda, # de repeticiones: ", moda(humedad))
 print("mediana: ", mediana(humedad))
 print("cuartiles [Q1, Q2, Q3]: ", cuartiles(humedad))
+
+print("varianza: ", varianza(humedad))
+print("desviacion estandar: ", desviacion_estandar(humedad))
+print("coeficiente de variacion: ", coeficiente_de_variacion(humedad))
+print("rango muestral: ", rango_muestral(humedad))
+print("rango intercuartilico: ", RIC(humedad))
