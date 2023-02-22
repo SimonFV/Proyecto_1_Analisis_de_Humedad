@@ -2,6 +2,8 @@
 
 import numpy as np
 
+import matplotlib.pyplot as plt
+
 # Extraccion de datos del del archivo energydata_complete.csv
 
 filename = 'energydata_complete.csv' # Nombre/ruta del archivo
@@ -78,6 +80,48 @@ def rango_muestral(lista):
 def RIC(lista):
     cuart = cuartiles(lista)
     return cuart[2] - cuart[0]
+
+
+# Cargar los datos del archivo CSV
+filename = 'energydata_complete.csv'
+data = np.genfromtxt(filename, delimiter=';', skip_header=1, usecols=[0, 1, 2, 6])
+
+# Extraer los datos de humedad en un array aparte
+humedad = np.array([elem[3] for elem in data])
+
+# Generar el boxplot
+fig, ax = plt.subplots()
+ax.boxplot(humedad)
+
+# Configurar las etiquetas de los ejes y el título del boxplot
+ax.set_xlabel('Humedad')
+ax.set_ylabel('Valores')
+ax.set_title('Boxplot de Humedad')
+
+# Mostrar el boxplot
+plt.show()
+
+# Extraccion de datos del archivo energydata_complete.csv
+
+filename = 'energydata_complete.csv'
+datos = np.genfromtxt(filename, delimiter = ';', skip_header = 1, dtype = None, encoding = None, usecols = [0, 1, 2, 6])
+
+# Se extraen los datos de humedad en un array aparte
+humedad = np.array([elem[3] for elem in datos])
+
+# Crear un histograma de los datos de humedad
+plt.hist(humedad, bins=20)
+
+# Configurar las etiquetas de los ejes y el título del histograma
+plt.xlabel('Humedad')
+plt.ylabel('Frecuencia')
+plt.title('Histograma de Humedad')
+
+# Mostrar el histograma
+plt.show()
+
+
+
 
 
 print("promedio: ", promedio(humedad))
