@@ -109,8 +109,8 @@ datos = np.genfromtxt(filename, delimiter = ';', skip_header = 1, dtype = None, 
 # Se extraen los datos de humedad en un array aparte
 humedad = np.array([elem[3] for elem in datos])
 
-# Crear un histograma de los datos de humedad
-plt.hist(humedad, bins=20)
+# Crear un histograma de los datos de humedad, ademas de que se ajusta la anchura de las lineas a mostrar en el grafico
+plt.hist(humedad, bins=20, width=0.98)
 
 # Configurar las etiquetas de los ejes y el título del histograma
 plt.xlabel('Humedad')
