@@ -101,25 +101,32 @@ ax.set_title('Boxplot de Humedad')
 # Mostrar el boxplot
 plt.show()
 
-# Extraccion de datos del archivo energydata_complete.csv
 
-filename = 'energydata_complete.csv'
-datos = np.genfromtxt(filename, delimiter = ';', skip_header = 1, dtype = None, encoding = None, usecols = [0, 1, 2, 6])
+##Histograma
+data = np.genfromtxt(filename, delimiter=';', skip_header=1, usecols=[0, 1, 2, 6])
 
-# Se extraen los datos de humedad en un array aparte
-humedad = np.array([elem[3] for elem in datos])
+# Extraer los datos de humedad y calcular su raíz cuadrada
+humedad = np.sqrt(data[:, 3])
 
-# Crear un histograma de los datos de humedad
-plt.hist(humedad, bins=20)
+# Definir el rango de los datos
+rango = (min(humedad), max(humedad))
+
+# Calcular el ancho del intervalo
+ancho = (rango[1] - rango[0]) / 142
+
+# Crear la figura del histograma
+plt.figure(figsize=(8, 6))
+
+# Crear el histograma con 142 celdas, con una anchura de 0.1
+plt.hist(humedad, bins=142, range=rango, width=0.014)
 
 # Configurar las etiquetas de los ejes y el título del histograma
-plt.xlabel('Humedad')
+plt.xlabel('Humedad (raíz cuadrada)')
 plt.ylabel('Frecuencia')
 plt.title('Histograma de Humedad')
 
-# Mostrar el histograma
+# Aca se muestra el histograma
 plt.show()
-
 
 
 
