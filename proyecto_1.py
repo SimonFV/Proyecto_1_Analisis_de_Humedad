@@ -117,8 +117,8 @@ ancho = (rango[1] - rango[0]) / 142
 # Crear la figura del histograma
 plt.figure(figsize=(8, 6))
 
-# Crear un histograma de los datos de humedad, ademas de que se ajusta la anchura de las lineas a mostrar en el grafico
-plt.hist(humedad, bins=20, width=0.98)
+# Crear el histograma con 142 celdas, con una anchura de 0.1
+plt.hist(humedad, bins=142, range=rango, width=0.014)
 
 # Configurar las etiquetas de los ejes y el título del histograma
 plt.xlabel('Humedad (raíz cuadrada)')
