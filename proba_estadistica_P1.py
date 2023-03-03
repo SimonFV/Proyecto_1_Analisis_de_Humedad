@@ -157,7 +157,7 @@ plt.title("Gráfico lineal de %humedad en función del tiempo en el año 2016")
 plt.show()
 #'''
 
-#'''(comentar para generar digrama de caja [agrega#])
+'''(comentar para generar digrama de caja [agrega#])
 # -------------------------Generar el boxplot----------------------------------
 fig, ax = plt.subplots()
 ax.boxplot(humedad)
@@ -169,33 +169,24 @@ ax.set_title('Boxplot de %Humedad')
 
 # Mostrar el boxplot
 plt.show()
-#'''
+'''
 
-'''(comentar para generar histograma [agrega#])
-# ------------Crear un histograma de los datos de humedad----------------------
-##Histograma
-data = np.genfromtxt(filename, delimiter=';', skip_header=1, usecols=[0, 1, 2, 6])
-
-# Extraer los datos de humedad y calcular su raíz cuadrada
-humedad = np.sqrt(data[:, 3])
-
-# Definir el rango de los datos
-rango = (min(humedad), max(humedad))
+# Numero de celdas
+n = round(np.sqrt(len(humedad)))
 
 # Calcular el ancho del intervalo
-ancho = (rango[1] - rango[0]) / 142
+ancho = ((_rango_muestral) * 0.05 + _rango_muestral) / n
 
 # Crear la figura del histograma
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(20, 10))
 
 # Crear el histograma con 142 celdas, con una anchura de 0.1
-plt.hist(humedad, bins=142, range=rango, width=0.014)
+plt.hist(humedad, bins = n, range = (humedad[0], humedad[len(humedad) - 1]), width = ancho, rwidth=0.5)
 
 # Configurar las etiquetas de los ejes y el título del histograma
-plt.xlabel('%Humedad (rai�z cuadrada)')
+plt.xlabel('% Humedad')
 plt.ylabel('Frecuencia')
-plt.title('Histograma de %Humedad')
+plt.title('Histograma de % de Humedad')
 
 # Aca se muestra el histograma
 plt.show()
-#'''
